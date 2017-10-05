@@ -1,0 +1,34 @@
+use bd_empresa_basico;
+
+--a questão
+select * from projeto;
+
+--b questão 
+select cpf, nome from empregado where sexo = 'F';
+
+--c questão
+select * from empregado where data_nascimento > 1980;
+            
+--questão d
+select nome, data_nascimento, sal_emp from empregado where sal_emp > 3.500;
+
+--questão e
+select nome, endereco from empregado where sal_emp < 1000 and sexo = 'M';
+
+--questão f 
+select nome_dependente from dependente where sexo = 'M' and parentesco = 'cunhado';
+
+--questão g
+update dependente set parentesco  = 'filho' where parentesco = 'ENTEADO';
+
+select parentesco from dependente;
+
+--questão h
+update empregado set sal_emp = sal_emp + 500 where sal_emp < 1000 and sexo = 'F';
+
+select sal_emp from empregado where sexo = 'F';
+
+--questao i
+update projeto set localizacao = 'ITAPIPOCA' where depto_controlador = '1' and localizacao = 'FORTALEZA';
+
+select * from projeto;
