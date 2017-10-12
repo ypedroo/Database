@@ -1,4 +1,4 @@
-﻿use bd_biblioteca;
+use bd_biblioteca12;
 insert into autor (autorid,nome,endereco,sexo) values (1,'XICA','RUA A','F');
 insert into autor (autorid,nome,endereco,sexo) values (2,'JOSE','AV 2','M');
 insert into autor (autorid,nome,endereco,sexo) values (3,'JOAO','AV 3','F');
@@ -16,7 +16,7 @@ insert into livro_autor (isbn, autorid) values (1,3);
 insert into livro_autor (isbn, autorid) values (2,2);
 insert into livro_autor (isbn, autorid) values (3,1);
 
-insert into exemplar (exemplarid, isbn, dataaquisicao) values (1,1,'2001/04/06')
+insert into exemplar (EXEMPLARID, isbn, dataaquisicao) values (1,1,'2001/04/06')
 insert into exemplar (exemplarid, isbn, dataaquisicao) values (2,1,'2001/04/08')
 insert into exemplar (exemplarid, isbn, dataaquisicao) values (3,2,'2001/04/07')
 insert into exemplar (exemplarid, isbn, dataaquisicao) values (4,2,'2001/07/08')

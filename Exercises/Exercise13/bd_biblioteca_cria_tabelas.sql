@@ -1,4 +1,4 @@
-USE BD_BIBLIOTECA;
+USE bd_biblioteca;
 
 CREATE TABLE AUTOR
 (AUTORID          INT          NOT NULL,

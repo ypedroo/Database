@@ -1,2 +1,2 @@
-create database bd_biblioteca;
+create database bd_biblioteca12;
 

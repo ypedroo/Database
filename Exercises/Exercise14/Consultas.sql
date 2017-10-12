@@ -68,3 +68,51 @@ where d.numero_departamento = p.depto_controlador;
 select e.nome, p.nome_projeto, d.nome_departamento
 from empregado e, departamento d, projeto p, empregado_projeto ep
 where e.cpf = ep.cpf_empregado and ep.numero_projeto = p.numero_projeto and p.depto_controlador = d.numero_departamento;
+
+#ACIMA ITENS DA QUESTAO 14-15
+#ABAIXO QUESTAO 16
+
+#ITEM A
+select min(sal_emp) as minimo, max(sal_emp) as maximo, avg(sal_emp) as media 
+from empregado;
+
+#ITEM B
+select count(numero_projeto) as quantidade_de_projetos 
+from projeto;
+
+#ITEM C
+#listequem é o empregado do departamento informática que possui o maior salário.
+select e.nome from empregado e, departamento d 
+where sal_emp = (select max(sal_emp) 
+from empregado) and d.nome_departamento like '%_nform_tica%';
+
+#ITEM D
+/*Liste o total de dependentes que os empregados de sexo feminino possuem.*/
+select count(cod_dependente) 
+from empregado e, dependente dp 
+where e.sexo = 'F';
+
+#ITEM E
+#Liste a quantidade de empregados que o gerente do departamento de informática gerencia
+select count(distinct nome) 
+from empregado e, departamento d
+where (select cpf from empregado e, departamento d where e.cpf = d.cpf_gerente and nome_departamento like '%inform_tica%')
+and lotacao = 1;
+ 
+select * from departamento;
+
+/*ITEM F
+Liste a quantidade de empregados que não possui cadastrada a data de nascimento.*/
+select count(data_nascimento) as Quem_nao_cadastrado
+from empregado
+where data_nascimento = null;
+
+/*ITEM G 
+Liste o total dos salários dos empregados da família Silva.*/
+select sum(sal_emp) as total_salario
+from empregado
+where nome like '%Silva%';
+
+select *
+from empregado;
+
