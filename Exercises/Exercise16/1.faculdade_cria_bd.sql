@@ -1,2 +1,2 @@
-CREATE DATABASE bd_Faculdade;
+CREATE DATABASE bd_Faculdade_1;
 

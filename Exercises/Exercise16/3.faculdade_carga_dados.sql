@@ -1,6 +1,5 @@
-
-USE bd_Faculdade;
-SET SQL_SAFE_UPDATES = 0;
+use bd_Faculdade_1;
+set SQL_SAFE_UPDATES = 0;
 
 insert into AREA (cod_area, nom_area) values (1, 'HUMANAS');
 insert into AREA (cod_area, nom_area) values (2, 'CIENCIAS TECNOLOGICAS');

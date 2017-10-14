@@ -1,4 +1,4 @@
-USE bd_Faculdade;
+USE bd_Faculdade_1;
 
 
 CREATE TABLE ALUNO
