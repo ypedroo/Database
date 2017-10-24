@@ -1,0 +1,73 @@
+﻿insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (1,'FERNANDO SOARES DE SIQUEIRA','RUA A','M',5000);
+insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (2,'ANA FLAVIA MARINHO DE LIMA','AV 2','F',1040);
+insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (3,'ANDRE BARROS PEREIRA','AV 3','M',1100);
+insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (4,'ANTONIO LUIZ DE OLIVEIRA BARRETO','AV 1','M',1500);
+insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (5,'ATSLANDS REGO DA ROCHA','AV 4','M',1200);
+insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (6,'CARLOS ARTUR SOBREIRA ROCHA','AV 5','M',400);
+insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (7,'ELIESER SALES PEREIRA','AV 6','M',1050);
+insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (8,'EMANUELE MARQUES','AV 7','F',940);
+insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (9,'ERICA ATEM GONCALVES DE ARAUJO COSTA','AV 8','M',100);
+insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (10,'JOAO JOSE DA SILVA XAVIER','AV 9','M',1080);
+insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (11,'FRANCISCO ALBERTO L. DE OLIVEIRA','AV 1','M',750);
+insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (12,'GERARDO VALDISIO VIANA','AV 10','M',1250);
+insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (13,'JOSE LASSANCE DE CASTRO SILVA','AV 1','M',1000);
+insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (14,'JOSE LEUDO MAIA','AV 11','M',1380);
+insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (15,'JOSE LUIZ SOUSA LIMA','AV 12','M',1340);
+insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (16,'MAGDA ROCHA PAMPLONA','AV 13','F',800);
+insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (17,'MARCUS RODRIGUES','AV 14','M',700);
+insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (18,'MARIA ENEIDE LIMA ARAUJO','AV 15','F',650);
+insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (19,'MATEUS MOSCA VIANA','AV 16','M',400);
+insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (20,'PAULO CESAR DE ALMEIDA','AV 17','M',970);
+insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (21,'REJANE ALBUQUERQUE LIMA BRAGA','AV 18','F',600);
+insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (22,'RENATO CRAVEIRO DE SOUZA','AV 19','M',800);
+insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (23,'ROBERTO DE ALMEIDA FAÇANHA','AV 20','M',900);
+insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (24,'VALNEIDE CABRAL','AV 21','F',1000);
+
+insert into tipoinfracao (id_tipo, ds_tipo, valor) values (1, 'SEM CINTO DE SEGURANCA',100);
+insert into tipoinfracao (id_tipo, ds_tipo, valor) values (2, 'DOCUMENTACAO VENCIDA',200);
+insert into tipoinfracao (id_tipo, ds_tipo, valor) values (3, 'EXCESSO DE VELOCIDADE',300);
+insert into tipoinfracao (id_tipo, ds_tipo, valor) values (4, 'AVANCO DE SEMARAFO',400);
+insert into tipoinfracao (id_tipo, ds_tipo, valor) values (5, 'PARADA NA FAIXA DE PEDESTRE',500);
+insert into tipoinfracao (id_tipo, ds_tipo, valor) values (6, 'SEM HABILITACAO',100);
+
+insert into modelo (id_modelo, ds_modelo) values (1,'VECTRA');
+insert into modelo (id_modelo, ds_modelo) values (2,'POLO');
+insert into modelo (id_modelo, ds_modelo) values (3,'A4');
+insert into modelo (id_modelo, ds_modelo) values (4,'407');
+insert into modelo (id_modelo, ds_modelo) values (5,'FUSION');
+insert into modelo (id_modelo, ds_modelo) values (6,'L200');
+insert into modelo (id_modelo, ds_modelo) values (7,'PALLAS');
+insert into modelo (id_modelo, ds_modelo) values (8,'RANGER');
+insert into modelo (id_modelo, ds_modelo) values (9,'TR4');
+insert into modelo (id_modelo, ds_modelo) values (10,'A3');
+insert into modelo (id_modelo, ds_modelo) values (11,'FUSCA');
+
+insert into classe (id_classe, ds_classe) values (1,'UTILITARIO');
+insert into classe (id_classe, ds_classe) values (2,'PASSEIO');
+insert into classe (id_classe, ds_classe) values (3,'ESPORTIVO');
+insert into classe (id_classe, ds_classe) values (4,'COMPETICAO');
+
+insert into veiculo (placa,ano_fabric, cor, classe, modelo, cod_proprietario) values (1,2007,'PRETO',3,3,1);
+insert into veiculo (placa,ano_fabric, cor, classe, modelo, cod_proprietario) values (2,2009,'PRETO',3,10,1);
+insert into veiculo (placa,ano_fabric, cor, classe, modelo, cod_proprietario) values (3,2008,'VERDE',3,3,1);
+insert into veiculo (placa,ano_fabric, cor, classe, modelo, cod_proprietario) values (4,2006,'BRANCO',2,5,2);
+insert into veiculo (placa,ano_fabric, cor, classe, modelo, cod_proprietario) values (5,2009,'AZUL',2,4,3);
+insert into veiculo (placa,ano_fabric, cor, classe, modelo, cod_proprietario) values (6,2010,'PRATA',2,7,3);
+insert into veiculo (placa,ano_fabric, cor, classe, modelo, cod_proprietario) values (7,2008,'VERMELHO',1,8,4);
+insert into veiculo (placa,ano_fabric, cor, classe, modelo, cod_proprietario) values (8,2009,'AZUL',1,9,4);
+
+--ANO/MES/DIA
+insert into infracoes (id_infracao, local, data_hora, placa_veiculo, cod_infra, valor_infra) values (1,'FORTALEZA','2007/07/13',1,6,750);
+insert into infracoes (id_infracao, local, data_hora, placa_veiculo, cod_infra, valor_infra) values (2,'FORTALEZA','2009/05/13',2,2,350);
+insert into infracoes (id_infracao, local, data_hora, placa_veiculo, cod_infra, valor_infra) values (3,'FORTALEZA','2009/05/13',3,3,350);
+insert into infracoes (id_infracao, local, data_hora, placa_veiculo, cod_infra, valor_infra) values (4,'FORTALEZA','2009/04/13',3,4,250);
+insert into infracoes (id_infracao, local, data_hora, placa_veiculo, cod_infra, valor_infra) values (5,'FORTALEZA','2009/03/13',5,4,650);
+insert into infracoes (id_infracao, local, data_hora, placa_veiculo, cod_infra, valor_infra) values (6,'FORTALEZA','2009/03/13',4,5,350);
+insert into infracoes (id_infracao, local, data_hora, placa_veiculo, cod_infra, valor_infra) values (7,'FORTALEZA','2007/09/13',1,6,1750);
+insert into infracoes (id_infracao, local, data_hora, placa_veiculo, cod_infra, valor_infra) values (8,'FORTALEZA','2009/07/13',2,2,1350);
+insert into infracoes (id_infracao, local, data_hora, placa_veiculo, cod_infra, valor_infra) values (9,'FORTALEZA','2009/07/13',3,3,1350);
+insert into infracoes (id_infracao, local, data_hora, placa_veiculo, cod_infra, valor_infra) values (10,'FORTALEZA','2009/07/13',3,4,1250);
+insert into infracoes (id_infracao, local, data_hora, placa_veiculo, cod_infra, valor_infra) values (11,'FORTALEZA','2009/05/13',5,4,1650);
+insert into infracoes (id_infracao, local, data_hora, placa_veiculo, cod_infra, valor_infra) values (12,'FORTALEZA','2009/05/13',4,5,1350);
+insert into infracoes (id_infracao, local, data_hora, placa_veiculo, cod_infra, valor_infra) values (13,'FORTALEZA','2009/09/14',8,5,850);
+insert into infracoes (id_infracao, local, data_hora, placa_veiculo, cod_infra, valor_infra) values (14,'FORTALEZA','2009/10/14',8,5,150);

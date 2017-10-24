@@ -1,4 +1,4 @@
-use bd_biblioteca12;
+use bd_biblioteca;
 insert into autor (autorid,nome,endereco,sexo) values (1,'XICA','RUA A','F');
 insert into autor (autorid,nome,endereco,sexo) values (2,'JOSE','AV 2','M');
 insert into autor (autorid,nome,endereco,sexo) values (3,'JOAO','AV 3','F');

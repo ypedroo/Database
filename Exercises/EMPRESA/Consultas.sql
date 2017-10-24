@@ -113,6 +113,32 @@ select sum(sal_emp) as total_salario
 from empregado
 where nome like '%Silva%';
 
-select *
-from empregado;
+-- Questão 20
+/* ITEM A 
+Liste a quantidade de projetos que cada empregado está alocado.*/
 
+select e.nome,count(ep.numero_projeto)
+from empregado e
+		left join empregado_projeto ep 
+			on e.cpf = ep.cpf_empregado
+group by e.nome;
+
+/*ITEM B
+Liste a quantidade de empregados que cada projeto tem alocado.*/
+select p.nome_projeto,count(ep.cpf_empregado)
+from projeto p
+		left join empregado_projeto ep
+        on ep.numero_projeto = p.numero_projeto
+group by p.nome_projeto;
+
+/*ITEM C
+Liste a quantidade de empregado por sexo que cada departamento possui.*/
+
+select e.sexo, dp.nome_departamento, count(e.lotacao)
+from empregado e 
+		right join departamento dp 
+        on dp.numero_departamento = e.lotacao
+group by e.sexo, dp.nome_departamento;
+
+
+        
