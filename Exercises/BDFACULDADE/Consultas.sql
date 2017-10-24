@@ -38,25 +38,41 @@ on d.cod_depto = dpa.cod_depto) f
 -- questão 18
 /*item a
 Liste o nome das disciplinas do departamento de Computação*/
- select d.des_disc
+ select d.des_disc, dp.des_depto
  from DISCIPLINA d , DEPARTAMENTO dp
  where d.cod_depto = dp.cod_depto and des_depto like '%Computa__o%'
- group by des_disc;
+ group by des_disc,des_depto;
 /*item b
 Liste os nomes dos alunos que cursam a disciplina Banco de Dados I e o nome do professor que
 ministra esta disciplina. REVER*/
 #as chaves dos selects dos joins tem q ser as mesmas
 select a.nom_aluno, p.nom_prof
-from PROFESSOR p,DISCIPLINA d,ALUNO a inner join(select ad.mat_aluno
-from ALUNODISCIPLINA ad, DISCIPLINA d 
-where ad.cod_disc = d.cod_disc and 
-d.des_disc like '%Banco_de_Dados_%') as dis
-on a.mat_aluno = dis.mat_aluno
-where p.mat_prof = d.mat_prof and d.des_disc like '%Banco_de_Dados_%';
+from ALUNO a, ALUNODISCIPLINA ad, DISCIPLINA d, PROFESSOR p
+where a.mat_aluno = ad.mat_aluno and
+	  ad.cod_disc = d.cod_disc and
+	  d.mat_prof = p.mat_prof  and
+      d.des_disc like '%Banco_%';
 
 /*item c
 Liste as disciplinas da área de Ciências Tecnológicas*/
 select d.des_disc
-from DISCIPLINA d inner join (select dp.cod_depto from DEPARTAMENTO dp, AREA ar where nom_area like '%_TECNOLOGICAS%')as dpa
-on d.cod_depto = dpa.cod_depto
-;
+from	DISCIPLINA d, DEPARTAMENTO dp ,AREA ar
+where d.cod_depto = dp.cod_depto and
+	  ar.cod_area = dp.cod_area 	 and
+      ar.nom_area like '%Ci_ncias Tecnol_gicas%';
+      
+
+/* OUTRA FORMA ITEM C
+select d.des_disc
+from DISCIPLINA d 
+inner join (select dp.cod_depto from DEPARTAMENTO dp, AREA ar where nom_area like '%_TECNOLOGICAS%')as dpa
+on d.cod_depto = dpa.cod_depto*/
+
+/*ITEM D
+Encontre as disciplinas ministradas pelo professor Fernando Siqueira.*/
+select p.nom_prof, d.des_disc
+from PROFESSOR p, DISCIPLINA d
+where d.mat_prof = p.mat_prof and
+	  p.nom_prof like '%Fernando_Siqueira%'
+GROUP BY d.des_disc, p.nom_prof;
+	  
