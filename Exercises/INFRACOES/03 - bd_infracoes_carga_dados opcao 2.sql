@@ -1,3 +1,4 @@
+-- use bd_infracoes;
 ﻿insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (1,'FERNANDO SOARES DE SIQUEIRA','RUA A','M',5000);
 insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (2,'ANA FLAVIA MARINHO DE LIMA','AV 2','F',1040);
 insert into proprietario (codigo,nome,endereco,sexo,renda_mensal) values (3,'ANDRE BARROS PEREIRA','AV 3','M',1100);
@@ -56,7 +57,7 @@ insert into veiculo (placa,ano_fabric, cor, classe, modelo, cod_proprietario) va
 insert into veiculo (placa,ano_fabric, cor, classe, modelo, cod_proprietario) values (7,2008,'VERMELHO',1,8,4);
 insert into veiculo (placa,ano_fabric, cor, classe, modelo, cod_proprietario) values (8,2009,'AZUL',1,9,4);
 
---ANO/MES/DIA
+-- ANO/MES/DIA
 insert into infracoes (id_infracao, local, data_hora, placa_veiculo, cod_infra, valor_infra) values (1,'FORTALEZA','2007/07/13',1,6,750);
 insert into infracoes (id_infracao, local, data_hora, placa_veiculo, cod_infra, valor_infra) values (2,'FORTALEZA','2009/05/13',2,2,350);
 insert into infracoes (id_infracao, local, data_hora, placa_veiculo, cod_infra, valor_infra) values (3,'FORTALEZA','2009/05/13',3,3,350);

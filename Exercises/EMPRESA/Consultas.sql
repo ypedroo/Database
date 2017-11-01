@@ -38,14 +38,17 @@ select * from projeto;
 
 select e.cpf, e.nome, e.sal_emp, d.nome_departamento 
 from empregado e, departamento d
-where e.cpf = d.cpf_gerente;
+where e.lotacao = d.numero_departamento;
 
 #questao k
 #Liste o nome dos empregados que estão lotados no departamento de informática‟ e de sexo feminino
 
 select e.nome 
 from empregado e, departamento d
-where nome_departamento = 'INFORMATICA' and e.sexo = 'F';
+where
+e.lotacao = d.numero_departamento and 
+nome_departamento = 'INFORMATICA' and 
+e.sexo = 'F';
 
 #questao l
 #Liste o CPF e nome dos empregados que são gerentes e nome do departamento que gerencia.
@@ -70,7 +73,7 @@ from empregado e, departamento d, projeto p, empregado_projeto ep
 where e.cpf = ep.cpf_empregado and ep.numero_projeto = p.numero_projeto and p.depto_controlador = d.numero_departamento;
 
 #ACIMA ITENS DA QUESTAO 14-15
-#ABAIXO QUESTAO 16
+#ABAIXO QUESTAO 17
 
 #ITEM A
 select min(sal_emp) as minimo, max(sal_emp) as maximo, avg(sal_emp) as media 
@@ -117,15 +120,16 @@ where nome like '%Silva%';
 /* ITEM A 
 Liste a quantidade de projetos que cada empregado está alocado.*/
 
-select e.nome,count(ep.numero_projeto)
+select e.nome, isnull(count(ep.numero_projeto))as qtd_proj
 from empregado e
 		left join empregado_projeto ep 
 			on e.cpf = ep.cpf_empregado
-group by e.nome;
+group by e.nome
+ORDER BY e.nome;
 
 /*ITEM B
 Liste a quantidade de empregados que cada projeto tem alocado.*/
-select p.nome_projeto,count(ep.cpf_empregado)
+select p.nome_projeto,count(p.numero_projeto) as qtd_empregados
 from projeto p
 		left join empregado_projeto ep
         on ep.numero_projeto = p.numero_projeto
@@ -134,11 +138,88 @@ group by p.nome_projeto;
 /*ITEM C
 Liste a quantidade de empregado por sexo que cada departamento possui.*/
 
-select e.sexo, dp.nome_departamento, count(e.lotacao)
+select e.sexo, dp.nome_departamento, count(e.cpf) as qtd
 from empregado e 
 		right join departamento dp 
         on dp.numero_departamento = e.lotacao
-group by e.sexo, dp.nome_departamento;
+group by e.sexo, dp.nome_departamento
+order by dp.nome_departamento;
+ /*ITEM D
+  Liste o nome do empregado e a quantidade de dependentes daqueles que possui um número de
+dependentes superior a 3.*/
+select e.nome, count(de.cpf_empregado) as qtd_dependente
+from empregado e 
+	left join dependente de
+		on de.cpf_empregado = e.cpf
+group by e.nome
+having count(de.cpf_empregado)>3
+order by e.nome;
 
+/* Item E
+Liste o nome do departamento e a quantidade de projetos que possui cada departamento*/
+select d.nome_departamento, count(p.numero_projeto) as qtd_projetos
+from departamento d
+		left join projeto p
+			on d.numero_departamento = p.depto_controlador
+group by d.nome_departamento
+order by d.nome_departamento asc;
 
-        
+/* ITEM F
+Liste o total de salários pagos por departamento*/
+SELECT d.nome_departamento, sum(e.sal_emp) as total
+FROM departamento d
+		left join empregado e
+			on d.numero_departamento = e.lotacao
+group by d.nome_departamento
+order by d.nome_departamento;
+
+/* ITEM G
+) Liste os departamentos cujos totais de salários pagos são maiores que R$ 6000,00*/
+SELECT d.nome_departamento, sum(e.sal_emp) as total
+FROM departamento d
+		left join empregado e
+			on d.numero_departamento = e.lotacao
+group by d.nome_departamento
+having sum(e.sal_emp)>6000
+order by d.nome_departamento;
+
+/*ITEM H
+Liste a média salarial dos empregados do sexo masculino de cada departamento*/
+SELECT d.nome_departamento, avg(e.sal_emp) as qtd_que_macho_ganha
+FROM departamento d
+		LEFT JOIN empregado e
+			on d.numero_departamento = e.lotacao
+where e.sexo = 'M'
+GROUP BY d.nome_departamento
+ORDER BY d.nome_departamento desc;
+
+/*ITEM I
+Liste o nome do departamento e quantidade de empregados que possui, considerando apenas
+aqueles departamentos que possui a média salarial maior que a média salarial da empresa.*/
+select d.nome_departamento, count(e.cpf) as qtd_emp
+from departamento d
+		left join empregado e
+			on e.lotacao = d.numero_departamento
+group by d.nome_departamento
+having avg(e.sal_emp) > (select avg(sal_emp) from empregado)
+order by d.nome_departamento;
+
+/* ITEM J
+Liste o nome dos empregados do sexo masculino que possuem dependentes e que seu salário é
+maior que a média salarial de algum departamento.*/
+select e.nome, e.sal_emp
+from empregado e
+where e.sexo = 'M'
+and sal_emp >= /*some*/ (select avg(sal_emp) from empregado group by e.nome)
+and exists (select * from dependente de where e.cpf = de.cpf_empregado);
+
+/* ITEM K
+Liste o nome do departamento que possui empregados que não estão alocados em projetos.*/
+SELECT d.nome_departamento
+FROM departamento d
+WHERE exists (select * from empregado e
+		       where e.lotacao = d.numero_departamento
+               and not exists(select * from empregado_projeto ep
+								where ep.cpf_empregado = e.cpf)
+                                );
+

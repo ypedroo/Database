@@ -2,7 +2,7 @@ use bd_Faculdade_1
 set SQL_SAFE_UPDATES = 0;
 
 #ITEM A
-select des_disc
+select des_disc, dp.nome_departamento
 from DISCIPLINA d, DEPARTAMENTO dp
 where d.cod_depto = dp.cod_depto;
 
@@ -26,14 +26,11 @@ from DISCIPLINA d, PROFESSOR p
 where p.mat_prof = d.mat_prof and nom_prof like '%_Siqueira%';
 
 /*ITEM E 
-Encontre os alunos que cursam disciplinas da área Ciências Tecnológicas.
-TA ERRADO */
+Encontre os alunos que cursam disciplinas da área Ciências Tecnológicas.*/
 select a.nom_aluno
-from ALUNO a inner join (select ad.mat_aluno from ALUNODISCIPLINA ad, DISCIPLINA d) as ad
-on a.mat_aluno = ad.mat_aluno
-WHERE (select d.cod_disc from DISCIPLINA d inner join (select dp.cod_depto from DEPARTAMENTO dp, AREA ar where nom_area like '%_TECNOLOGICAS%')as dpa
-on d.cod_disc = dpa.cod_disc) and a.nom_aluno is not null
-on d.cod_depto = dpa.cod_depto) f
+from ALUNO a, ALUNODISCIPLINA ad, Disciplina D, Departamento dp, Area ar
+where a.mat_aluno = ad.mat_aluno and ad.cod_disc = d.cod_disc and d.cod_depto = dp.cod_depto and
+dp.cod_area = ar.cod_area
 ;
 -- questão 18
 /*item a
@@ -73,6 +70,36 @@ Encontre as disciplinas ministradas pelo professor Fernando Siqueira.*/
 select p.nom_prof, d.des_disc
 from PROFESSOR p, DISCIPLINA d
 where d.mat_prof = p.mat_prof and
-	  p.nom_prof like '%Fernando_Siqueira%'
+	  p.nom_prof like '%Fernando_%'
 GROUP BY d.des_disc, p.nom_prof;
-	  
+/*ITEM E
+Encontre os alunos que cursam disciplinas da área Humanas. */
+SELECT A.NOM_ALUNO
+FROM ALUNO A, ALUNODISCIPLINA AD, DISCIPLINA DI, DEPARTAMENTO D, AREA AR
+WHERE A.MAT_ALUNO = AD.MAT_ALUNO AND
+ AD.COD_DISC = DI.COD_DISC AND
+ DI.COD_DEPTO = D.COD_DEPTO AND
+ D.COD_AREA = AR.COD_AREA AND
+ AR.NOM_AREA = 'HUMANAS';
+ 
+ /*ITEM F
+ Listar a quantidade de alunos por sexo*/
+ select a.tip_sexo, count(*)
+ from ALUNO a
+ group by a.tip_sexo;
+ 
+ /*ITEM G 
+ Listar a quantidade de disciplinas que um professor ministra*/
+ select p.nom_prof, count(*) qtd_disciplina
+ from PROFESSOR p, DISCIPLINA d
+ where p.mat_prof = d.mat_prof
+ group by p.nom_prof;
+ 
+ /*ITEM H
+ Listar as disciplinas que possuem mais de 4 alunos matriculados*/
+ select d.des_disc, count(*) QTD_ALUNOS
+ from DISCIPLINA d, ALUNO a, ALUNODISCIPLINA ad
+ where a.mat_aluno = ad.mat_aluno and
+	   ad.cod_disc = d.cod_disc
+group by d.des_disc
+having count(*)> 4;
