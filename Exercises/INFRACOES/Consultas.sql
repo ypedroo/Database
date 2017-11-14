@@ -172,5 +172,31 @@ where p.sexo = 'M'
 group by p.nome, v.placa, v.ano_fabric, v.modelo;
 
 
+-- lista 23
+-- a
+/*Uma visão que tenha o nome do proprietário, a placa do veículo, a descrição do modelo e classe, e
+o valor das infrações caso tenha (dica: left join e group by)*/
+create view v1 as
+select p.nome, v.placa, m.ds_modelo modelo, c.ds_classe classe, sum(i.valor_infra) as infracoes
+from proprietario p left join
+		veiculo v 
+        on p.codigo = v.cod_proprietario
+			left join modelo m
+				on v.modelo = m.id_modelo
+					left join classe c
+						on v.classe = c.id_classe
+							left join infracoes i
+								on v.placa = i.placa_veiculo
+group by p.nome, v.placa, m.ds_modelo, c.ds_classe;
 
+-- b
+/*Uma visão que liste a descrição das infrações, o valor total de infrações aplicadas no período de
+2014.*/ 
+create view v2 as
+select tp.ds_tipo as desc_infra, sum(i.valor_infra)
+from  infracoes i inner join tipoinfracao tp
+			on i.cod_infra = tp.id_tipo
+where i.data_hora like '%2009%'
+group by tp.ds_tipo;
 
+select * from v2;

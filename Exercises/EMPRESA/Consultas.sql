@@ -222,4 +222,32 @@ WHERE exists (select * from empregado e
                and not exists(select * from empregado_projeto ep
 								where ep.cpf_empregado = e.cpf)
                                 );
+-- views
+use bd_empresa_basico;
+-- a
+create view v1 as
+select d.nome_departamento, e.nome, e.sal_emp
+from empregado e right join departamento d
+		on e.cpf = d.cpf_gerente;
+select * from v1;
+-- b
+create view v2 as
+(select e.nome, e.sal_emp
+	from empregado e left join departamento d
+		on e.lotacao = d.numero_departamento
+where d.nome_departamento like '%INFORMATICA%')
+	 union 
+(select e2.nome from
+	  empregado e2 inner join departamento d
+		on d.cpf_gerente = e2.cpf
+where d.nome_departamento like '%INFORMATICA%');
 
+-- c
+
+create view v3 as
+select p.nome_projeto, d.nome_departamento,p.depto_controlador, count(*) empregados
+from projeto p inner join departamento d
+		on p.depto_controlador = d.numero_departamento
+		left join empregado_projeto ep
+		on p.numero_projeto = ep.numero_projeto
+group by p.nome_projeto, d.nome_departamento,p.depto_controlador
