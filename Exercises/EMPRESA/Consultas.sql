@@ -317,7 +317,7 @@ update empregado set sal_emp = 6000 where cpf = 1;
 
 call AltSalFunc (1,10);
 
-select * from empregado
+select * from empregado;
 
 -- item b
 /*Construa um procedimento armazenado de banco de dados (
@@ -339,14 +339,25 @@ matr_usu int,
 situ_inc int,
 constraint pk_tb_log primary key(id_Seq)
 );
+
 delimiter //
 create procedure valcompra( in
- cd_item int, valc int, valv int , mat int
-) as
-declare situ_inc int , seq int
+cd_item int, valc int, valv int , mat int
+) 
 begin
-	if valv > valc then situ_inc = 0,
-	else situ_inc = 1 
-end if
+declare situ_inc int; 
+declare seq int;
+	if valv > valc then set situ_inc = 0;
+	else set situ_inc = 1;
+end if;
+	set seq = (select count(*) from TB_LOG) + 1;
+    insert into TB_LOG(id_seq, id_item, prc_venda, prc_compra, matr_usu, situ_inc) 
+    values(seq,cd_item,valv,valc,mat,situ_inc);
+
 end //
-delimiter;
+delimiter ;
+
+call valcompra(1,10,20,1);
+
+select * from TB;
+

@@ -200,3 +200,65 @@ where i.data_hora like '%2009%'
 group by tp.ds_tipo;
 
 select * from v2;
+
+-- lista 26 pl/t sql
+-- questão 3
+/*
+delimiter //
+create procedure valcompra( in
+cd_item int, valc int, valv int , mat int
+) 
+begin
+declare situ_inc int; 
+declare seq int;
+	if valv > valc then set situ_inc = 0;
+	else set situ_inc = 1;
+end if;
+	set seq = (select count(*) from TB_LOG) + 1;
+    insert into TB_LOG(id_seq, id_item, prc_venda, prc_compra, matr_usu, situ_inc) 
+    values(seq,cd_item,valv,valc,mat,situ_inc);
+
+end //
+delimiter ;*/
+/*a)Construa  uma  stored  procedure 
+para  exibir  o  valor  total  de  infração  de  um  determinado 
+proprietário */
+delimiter //
+create procedure proprietario_val
+(in proprietario int)
+begin
+	select p.nome, sum(i.valor_infra) as total_infracao
+    from proprietario p inner join veiculo v
+		on p.codigo = v.cod_proprietario
+    left join infracoes i
+		on v.placa = i. placa_veiculo
+	group by p.nome;
+end//
+delimiter ;
+
+call proprietario_Val (1);
+
+-- item b
+drop procedure include_infrac;
+delimiter //
+create procedure include_infrac
+(in nome varchar (50), placa int, idtipo int, valor decimal(10,2), local varchar(30))
+begin
+
+declare cod int;
+declare tipo_infra int;
+
+set tipo_infra = (select id_tipo from tipoinfracao where id_tipo like idtipo);
+set cod = ((select max(id_infracao) from infracoes) + 1);
+
+insert into infracoes (id_infracao, placa_veiculo, local, cod_infra, valor_infra)
+values(cod, placa, local, tipo_infra, valor);
+
+end //
+delimiter ;
+
+
+call include_infrac('Ynoã', 2, 3 , 90.02, 'FORTALEZA'); 
+
+select * from infracoes i inner join veiculo v
+		on i.placa_veiculo = v.placa;
