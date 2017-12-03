@@ -295,5 +295,24 @@ end
 delete from empregado
 	where lotacao = (select numero_departamento
 						from departamento
-						where nome_departamento = 'INFORMATICA')
-                
+						where nome_departamento = 'INFORMATICA');
+
+
+/* . Construa um procedimento armazenado de banco de dados (stored procedure) para alterar o salário de
+um determinado empregado conforme o percentual informado. Para isso, a stored procedure receberá
+como parâmetro de entrada a matricula do funcionário e o percentual, em seguida realizará a
+atualização do salário desse funcionário. (dica: utilize o comando update) */
+delimiter //
+create procedure AltSalFunc
+ (
+ in func int, aumento decimal
+ )
+begin
+update empregado set sal_emp = (sal_emp * aumento) where
+cpf=func;
+end //
+
+delimiter;
+
+call AltSalFunc (1,0.1);
+
