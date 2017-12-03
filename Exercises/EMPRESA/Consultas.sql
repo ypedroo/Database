@@ -313,6 +313,40 @@ cpf=func;
 end //
 
 delimiter;
+update empregado set sal_emp = 6000 where cpf = 1;
 
-call AltSalFunc (1,0.1);
+call AltSalFunc (1,10);
 
+select * from empregado
+
+-- item b
+/*Construa um procedimento armazenado de banco de dados (
+stored procedure
+) para registrar a compra 
+de  um  novo  item  em  uma  tabela  de  LOG  (especificada 
+abaixo).  O  procedimento  deve  receber  como 
+parâmetro de entrada o código do item, o valor  de compra, o valor  de venda, e  a matrícula do usuário 
+que está realizando a inclusão do item. Se o preço de venda for maior que o preço de compra deve ser 
+gravado no c
+ampo situ_inc o valor 0, senão valor 1.
+*/
+create table TB_LOG(
+id_seq int not null,
+id_item int not null,
+prc_venda decimal,
+prc_compra decimal,
+matr_usu int,
+situ_inc int,
+constraint pk_tb_log primary key(id_Seq)
+);
+delimiter //
+create procedure valcompra( in
+ cd_item int, valc int, valv int , mat int
+) as
+declare situ_inc int , seq int
+begin
+	if valv > valc then situ_inc = 0,
+	else situ_inc = 1 
+end if
+end //
+delimiter;
