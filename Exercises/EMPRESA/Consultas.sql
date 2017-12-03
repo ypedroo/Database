@@ -250,4 +250,50 @@ from projeto p inner join departamento d
 		on p.depto_controlador = d.numero_departamento
 		left join empregado_projeto ep
 		on p.numero_projeto = ep.numero_projeto
-group by p.nome_projeto, d.nome_departamento,p.depto_controlador
+group by p.nome_projeto, d.nome_departamento,p.depto_controlador;
+
+-- Ls 25 TSQ
+/*ITEM A Crie um script de BD para aumentar o salário dos empregados conforme regra abaixo. Considere o que
+o BD EMPRESA_BASICO */
+update empregado
+	set sal_emp = (case
+					 when(sexo = 'M' and lotacao = 1) then sal_emp *1.14
+					 when(sexo = 'F' and lotacao = 1) then sal_emp *1.15
+                     when(sexo = 'M' and lotacao <> 1) then sal_emp *1.05
+                     when(sexo = 'F' and lotacao <> 1) then sal_emp *1.10
+                     end);
+                     
+-- item b
+if exists (select * from dependente de
+				inner join empregado e
+				on de.cpf_empregado = e.cpf
+                inner join departamento d
+                on e.lotacao = d.numero_departamento
+				where d.nome_departamento = 'INFORMATICA')
+begin
+ delete from dependente
+    where cpf_empregado in(select cpf from empregado e
+								inner join departamento d
+									on e.lotacao = d.numero_departamento
+                              where d.nome_departamento = 'INFORMATICA')
+end
+
+if exists ( select * from empregado_projeto ep
+				inner join empregado e
+                on ep.cpf_empregado = e.cpf
+                inner join departamento d
+                on e.lotacao = d.numero_departamento
+			where d.nome_departamento = 'INFORMATICA')
+begin
+	delete from empregado_projeto 
+    where cpf_empregado in (select cpf from empregado e
+							inner join departamento d
+								on e.lotacao = d.numero_departamento
+							where d.nome_departamento = 'INFORMATICA')
+end
+
+delete from empregado
+	where lotacao = (select numero_departamento
+						from departamento
+						where nome_departamento = 'INFORMATICA')
+                
