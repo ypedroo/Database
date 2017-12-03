@@ -359,5 +359,8 @@ delimiter ;
 
 call valcompra(1,10,20,1);
 
-select * from TB;
+select * from TB_LOG;
+
+
+
 
