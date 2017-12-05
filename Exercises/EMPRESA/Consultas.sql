@@ -361,6 +361,18 @@ call valcompra(1,10,20,1);
 
 select * from TB_LOG;
 
+-- lista 28
+/*a) Crie uma trigger que evite que sejam inseridos novos dependentes (na tabela dependentes) se a idade
+do dependente for maior que 18 anos e ele for do sexo masculino (dica: utilize uma função que retorne
+a data atual). */
+delimiter //
+create trigger checkage before insert on dependente for each row
+begin
+ if(select * from dependente where new.data_nascimento >= 1999/01/01) then
+		rollback ;
+end if;
+end //
+	
+		
 
-
-
+delimiter ;
